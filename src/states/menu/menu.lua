@@ -2,12 +2,9 @@ require("src/utils/timer")
 
 Menu = {}
 
-function Menu:load(state)
-    self.width = 350
-    self.height = 450
-    if state then
-        state = "game"
-    end
+function Menu:load()
+    Menu.width = 350
+    Menu.height = 450
 end
 
 function Menu:update(dt)
@@ -20,8 +17,6 @@ function Menu:draw()
     love.graphics.printf("Press space to start", love.graphics.newFont(25), 0, 350, 1280, "center")
     love.graphics.setColor(1, 1, 1, 1)
     if love.keyboard.isDown("space") then
-        if self.state then
-            self.state = self.state + "game"
-        end
+        WindowManager.state = WindowManager.state:gsub("menu", "game")
     end
 end
