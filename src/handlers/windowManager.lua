@@ -1,5 +1,5 @@
-require("src/ui/menu")
-require("src/game")
+require("src/states/menu/menu")
+require("src/states/game/game")
 
 WindowManager = {}
 
