@@ -10,14 +10,14 @@ function Button:load()
     Button.height = 70
     Button.x = (Box.x + Box.width / 2) - Box.width / 3 - Button.width / 2 + Button.margin
     Button.y = 395
-    Button.hover = hover(Button.mx, Button.my, Button.x, Button.y, Button.width, Button.height)
+    Button.hover = Hover(Button.mx, Button.my, Button.x, Button.y, Button.width, Button.height)
 end
 
 
 function Button:draw(text,  fn, margin)
     Button.margin = Button.margin + margin
     love.graphics.setColor(0.3, 0.5, 0.2, 1)
-    if hover then
+    if Hover then
         love.graphics.setColor(0.3, 0.5, 0.2, 0.7)
     end
     love.graphics.rectangle("fill", Button.x, Button.y, Button.width, Button.height)
