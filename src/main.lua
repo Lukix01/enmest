@@ -7,6 +7,10 @@ function love.load()
     WindowManager:load()
 end
 
+function love.update(dt)
+    WindowManager:update(dt)
+end
+
 function love.draw()
     love.graphics.draw(grid) 
     WindowManager:draw()
