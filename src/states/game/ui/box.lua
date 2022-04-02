@@ -15,6 +15,6 @@ function GameBox:draw()
     love.graphics.printf("Houses: " .. Stats.investments.houses .. " | " .. "Lcoins: " .. Stats.investments.lcoins .. " | " .. "Hotels: " .. Stats.investments.hotels, love.graphics.newFont(18), 0, 350, 1280, "center")
     love.graphics.setColor(1, 1, 1, 1)
     for i, button in ipairs(Box.buttons) do
-        Button:draw(button.text, i)
+        Button:draw(button.text, i, button.x, 395)
     end
 end
