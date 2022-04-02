@@ -27,6 +27,7 @@ function Game:load()
     Stats.investments.lcoins = 0
     Stats.investments.hotels = 0
     Stats.income = 20
+    GameBox:load()
 end
 
 function Income()
@@ -38,5 +39,5 @@ function Game:update(dt)
 end
 
 function Game:draw()
-    GameBox()
+    GameBox:draw()
 end

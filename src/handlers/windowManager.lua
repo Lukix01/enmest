@@ -4,7 +4,7 @@ require("src/states/game/game")
 WindowManager = {}
 
 function WindowManager:load()
-    Menu:load(self.state)
+    Menu:load()
     Game:load()
 end
 
