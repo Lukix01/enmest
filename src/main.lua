@@ -1,5 +1,7 @@
 require("src/handlers/windowManager")
 
+love.graphics.setDefaultFilter("nearest", "nearest")
+
 function love.load()
     grid = love.graphics.newImage("assets/grid.png")
     WindowManager:load()
