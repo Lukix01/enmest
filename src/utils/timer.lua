@@ -2,7 +2,12 @@ Timer = {
     time = 0
 }
 
-function Timer:update(dt)
-    Timer.time = Timer.time + dt
-    print(Timer.time)
+function Timer:start(dt, time, fn)
+    self.time = self.time + dt
+    print(self.time)
+    if (time and fn and self.time >= time) then
+        fn()
+        self.time = 0
+    end
+    return self.time
 end
