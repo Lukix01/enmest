@@ -20,20 +20,19 @@ Stats = {
 }
 
 Box = {
+    width = 600,
+    height = 250,
+    x = love.graphics.getWidth() / 2 - 600 / 2,
+    y = love.graphics.getHeight() / 2 - 250 / 2,
     margin = 10,
     buttons = {
-        { text = "Buy a new " .. Game.nextInvestment.name, fn = nil },
-        -- { text = "Pay bills", fn = nil },
-        -- { text = "Go to work", fn = nil }
+        { text = "Buy a new " .. Game.nextInvestment.name, fn = nil, x = love.graphics.getWidth() / 2 - 600 / 2 },
+        { text = "Pay bills", fn = nil, x = love.graphics.getWidth() / 2 - 600 / 2  + 600 / 3 },
+        { text = "Go to work", fn = nil, x = love.graphics.getWidth() / 2 - 600 / 2  + 600 / 3 * 2 }
     }
 }
 
-
 function Game:load()
-    Box.width = 600
-    Box.height = 250
-    Box.x = love.graphics.getWidth() / 2 - Box.width / 2
-    Box.y = love.graphics.getHeight() / 2 - Box.height / 2
     Stats.income = 20
     GameBox:load()
 end
