@@ -3,6 +3,10 @@ require("src/states/game/ui/button")
 require("src/states/game/ui/box")
 
 Game = {
+    nextInvestment = {
+        name = "house",
+        price = 50
+    }
 }
 
 Stats = {
@@ -18,9 +22,9 @@ Stats = {
 Box = {
     margin = 10,
     buttons = {
-        { text = "Buy a new house", fn = nil },
-        { text = "Pay bills", fn = nil },
-        { text = "Go to work", fn = nil }
+        { text = "Buy a new " .. Game.nextInvestment.name, fn = nil },
+        -- { text = "Pay bills", fn = nil },
+        -- { text = "Go to work", fn = nil }
     }
 }
 
