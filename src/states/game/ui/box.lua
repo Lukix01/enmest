@@ -1,5 +1,6 @@
 GameBox = {}
 Button = {}
+require("src/events/hover")
 
 
 function GameBox:load()
