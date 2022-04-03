@@ -1,5 +1,5 @@
-require("src/states/menu/menu")
-require("src/states/game/game")
+require("states/menu/menu")
+require("states/game/game")
 
 WindowManager = {
     state = "menu"

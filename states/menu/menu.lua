@@ -1,5 +1,5 @@
-require("src/utils/timer")
-require("src/modules/key")
+require("utils/timer")
+require("modules/key")
 
 Menu = {}
 

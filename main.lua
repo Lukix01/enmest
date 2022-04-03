@@ -1,7 +1,6 @@
-require("src/handlers/windowManager")
+require("handlers/windowManager")
 
 love.graphics.setDefaultFilter("nearest", "nearest")
-
 
 function love.load()
     grid = love.graphics.newImage("assets/background.png")

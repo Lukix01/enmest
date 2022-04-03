@@ -1,7 +1,7 @@
-require("src/utils/timer")
-require("src/states/game/ui/box")
-require("src/states/game/ui/alert")
-require("src/modules/audio")
+require("utils/timer")
+require("states/game/ui/box")
+require("states/game/ui/alert")
+require("modules/audio")
 
 Stats = {
     investments = {
@@ -9,7 +9,7 @@ Stats = {
         { name = "lcoins", amount = 0, income = 250 },
         { name = "hotels", amount = 0, income = 700 }
     },
-    money = 100,
+    money = 1000000,
     bills = 20,
     waitingBills = 0,
     billsTime = 4,
@@ -21,7 +21,7 @@ Game = {
     nextInvestment = {
         name = "house",
         inv = 1,
-        price = 50,
+        price = 300,
         bills = 20,
     }
 }
@@ -31,8 +31,13 @@ function buyNewInvestment()
         Stats.investments[Game.nextInvestment.inv].amount = Stats.investments[Game.nextInvestment.inv].amount + 1
         Stats.money = Stats.money - Game.nextInvestment.price
         Stats.income = Stats.income + Stats.investments[Game.nextInvestment.inv].income 
-        Game.nextInvestment.price = Game.nextInvestment.price * 1.5
         Stats.bills = Stats.bills + Game.nextInvestment.bills 
+        if Stats.investments[1].amount == 4 then
+            Game.nextInvestment.name = "lcoin"
+            Game.nextInvestment.inv = 2
+            Game.nextInvestment.price = 1000
+            Game.nextInvestment.bills = 70
+        end
     end
 end
 
@@ -40,6 +45,7 @@ function PayBills()
     if Stats.money >= Stats.waitingBills and Stats.waitingBills >= 0 then
         Stats.money = Stats.money - Stats.waitingBills
         Stats.waitingBills = 0
+        Stats.billsTime = 4
     end
 end
 
@@ -54,9 +60,9 @@ Box = {
     y = love.graphics.getHeight() / 2 - 250 / 2,
     margin = 10,
     buttons = {
-        { text = "[1] Buy a new " .. Game.nextInvestment.name, hover = Game.nextInvestment.price .. "$", fn = buyNewInvestment, x = love.graphics.getWidth() / 2 - 600 / 2 },
-        { text = "[2] Pay bills", hover = "bills", fn = PayBills, x = love.graphics.getWidth() / 2 - 600 / 2  + 600 / 3, down = false },
-        { text = "[3] Go to work", hover = "work", fn = Work, x = love.graphics.getWidth() / 2 - 600 / 2  + 600 / 3 * 2, down = false }
+        { text = "[1] Buy a new " .. Game.nextInvestment.name, secondText = "Price: " .. Game.nextInvestment.price .. "$", fn = buyNewInvestment, x = love.graphics.getWidth() / 2 - 600 / 2 },
+        { text = "[2] Pay bills", secondText = "Bills: " .. Stats.waitingBills .. "$", fn = PayBills, x = love.graphics.getWidth() / 2 - 600 / 2  + 600 / 3, down = false },
+        { text = "[3] Go to work", fn = Work, x = love.graphics.getWidth() / 2 - 600 / 2  + 600 / 3 * 2, down = false }
     }
 }
 

@@ -1,4 +1,4 @@
-require("src/modules/key")
+require("modules/key")
 
 GameBox = {}
 Button = {}
@@ -26,6 +26,9 @@ function GameBox:draw()
         love.graphics.rectangle("fill", button.x, Button.y, Button.width, Button.height)
         love.graphics.setColor(1, 1, 1, 1)                                                                          
         love.graphics.print(button.text, Button.font, button.x + Button.width / 2 - Button.font:getWidth(button.text) / 2, Button.y + Button.height / 2 - Button.font:getHeight() / 2)
+        if button.secondText then
+            love.graphics.print(button.secondText, love.graphics.newFont(13), button.x + Button.width / 2 - Button.font:getWidth(button.secondText) / 2, Button.y + Button.height / 2 - Button.font:getHeight() / 2 + 45)
+        end
     end
 end
 
