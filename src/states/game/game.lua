@@ -12,6 +12,7 @@ Stats = {
     money = 100,
     bills = 20,
     waitingBills = 0,
+    billsTime = 4,
     income = 50
 }
 
@@ -32,8 +33,6 @@ function buyNewInvestment()
         Stats.income = Stats.income + Stats.investments[Game.nextInvestment.inv].income 
         Game.nextInvestment.price = Game.nextInvestment.price * 1.5
         Stats.bills = Stats.bills + Game.nextInvestment.bills 
-    else 
-        print("not enough money")
     end
 end
 
@@ -74,18 +73,19 @@ end
 
 function Game:update(dt)
     function Bills()
-        if Stats.waitingBills == Stats.bills * 3 then
+        if Stats.billsTime == 0 then
             love.event.quit()
         else
             Stats.waitingBills = Stats.waitingBills + Stats.bills
+            Stats.billsTime = Stats.billsTime - 1
             Audio:play("assets/sounds/alert.wav")
             Game.alert = true
         end
     end
     if Game.alert then
-        Alert:update(dt)
+        Alert:update(dt, "New bills to pay ("  .. Stats.waitingBills .. "$) " .. "You have " .. Stats.billsTime ..  " weeks to do that, otherwise you lose the game.")
     end 
-    Timer:start(dt, { { timeLimit = 10, fn = Income}, { timeLimit = 10, fn = Bills}  })
+    Timer:start(dt, { { timeLimit = 10, fn = Income}, { timeLimit = 40, fn = Bills }  })
 end
 
 function Game:draw()
