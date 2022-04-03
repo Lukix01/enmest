@@ -1,4 +1,5 @@
 require("src/utils/timer")
+require("src/events/key")
 
 Menu = {}
 
@@ -16,7 +17,5 @@ function Menu:draw()
     love.graphics.setColor(0.5, 0.5, 0.5, 1)
     love.graphics.printf("Press space to start", love.graphics.newFont(25), 0, 350, 1280, "center")
     love.graphics.setColor(1, 1, 1, 1)
-    if love.keyboard.isDown("space") then
-        WindowManager.state = "game"
-    end
+    Key:down("space", function() WindowManager.state = "game" end)
 end
