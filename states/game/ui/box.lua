@@ -11,7 +11,8 @@ function GameBox:load()
 end
 
 function GameBox:draw()
-    love.graphics.printf("Money: " .. Stats.money .. "$", love.graphics.newFont(20), Box.x - 15, Box.y - 50, Box.width, "right")
+    love.graphics.printf("Money: " .. Stats.money .. "$", love.graphics.newFont(20), Box.x - 15, Box.y - 70, Box.width, "right")
+    love.graphics.printf("Bills: " .. Stats.waitingBills .. "$", love.graphics.newFont(20), Box.x - 15, Box.y - 45, Box.width, "right")
     love.graphics.setColor(0, 0, 0, 0.3)
     love.graphics.rectangle("fill", Box.x, Box.y, Box.width, Box.height)
     love.graphics.setColor(1, 1, 1, 1)
