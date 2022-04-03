@@ -9,7 +9,7 @@ Stats = {
         { name = "lcoins", amount = 0, income = 250 },
         { name = "hotels", amount = 0, income = 700 }
     },
-    money = 1000000,
+    money = 100,
     bills = 20,
     waitingBills = 0,
     billsTime = 4,
@@ -35,14 +35,16 @@ function buyNewInvestment()
         if Stats.investments[1].amount == 10 and Stats.investments[2].amount == 0 then
             Game.nextInvestment.name = "lcoin"
             Game.nextInvestment.inv = 2
-            Game.nextInvestment.price = 1000
+            Game.nextInvestment.price = 2000
             Game.nextInvestment.bills = 70
         elseif Stats.investments[2].amount == 10 then
             Game.nextInvestment.name = "hotel"
             Game.nextInvestment.inv = 3
-            Game.nextInvestment.price = 5000
+            Game.nextInvestment.price = 20000
             Game.nextInvestment.bills = 200
         end
+    else
+        Audio:play("assets/sounds/fail.wav")
     end
 end
 
@@ -59,15 +61,15 @@ function Work()
 end
 
 Box = {
-    width = 600,
+    width = 650,
     height = 250,
-    x = love.graphics.getWidth() / 2 - 600 / 2,
+    x = love.graphics.getWidth() / 2 - 650 / 2,
     y = love.graphics.getHeight() / 2 - 250 / 2,
     margin = 10,
     buttons = {
-        { text = "[1] Buy a new " .. Game.nextInvestment.name, secondText = true, fn = buyNewInvestment, x = love.graphics.getWidth() / 2 - 600 / 2 },
-        { text = "[2] Pay bills", secondText = true, fn = PayBills, x = love.graphics.getWidth() / 2 - 600 / 2  + 600 / 3, down = false },
-        { text = "[3] Go to work", fn = Work, x = love.graphics.getWidth() / 2 - 600 / 2  + 600 / 3 * 2, down = false }
+        { text = "[1] Buy a new investment", secondText = true, fn = buyNewInvestment, x = love.graphics.getWidth() / 2 - 650 / 2 },
+        { text = "[2] Pay bills", secondText = true, fn = PayBills, x = love.graphics.getWidth() / 2 - 650 / 2  + 650 / 3, down = false },
+        { text = "[3] Go to work", fn = Work, x = love.graphics.getWidth() / 2 - 650 / 2  + 650 / 3 * 2, down = false }
     }
 }
 
