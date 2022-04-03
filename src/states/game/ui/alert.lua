@@ -10,13 +10,14 @@ function Alert:load()
     Alert.y = love.graphics.getHeight() / 2 - 250 / 2
 end
 
-function Alert:update(dt, state)
+function Alert:update(dt)
     Alert.state = true
-    if state and Alert.timeLeft >= 0 then
+    if Game.alert and Alert.timeLeft >= 0 then
         Alert.timeLeft = Alert.timeLeft - dt
     else
         Alert.state = false
         Alert.timeLeft = 6
+        Game.alert = false
     end
     print(Alert.timeLeft)
 end

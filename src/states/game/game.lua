@@ -83,7 +83,7 @@ function Game:update(dt)
         end
     end
     if Game.alert then
-        Alert:update(dt, Game.alert)
+        Alert:update(dt)
     end 
     Timer:start(dt, { { timeLimit = 10, fn = Income}, { timeLimit = 10, fn = Bills}  })
 end
