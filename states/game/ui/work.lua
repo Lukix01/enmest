@@ -17,7 +17,7 @@ end
 
 function Work:update(dt)
     if Work.finished then
-        if Work.countdown == 20 then
+        if Work.countdown == 60 then
             Game.alert.state = true
             Game.alert.text = "You can work again in one minute"
         end
@@ -39,7 +39,7 @@ function Click()
             Work.clicks = Work.clicks + 1
         else
             Game.working = false
-            Work.countdown = 20
+            Work.countdown = 60
             Work.finished = true
             Stats.money = Stats.money + 1000
             Audio:play("assets/sounds/alert.wav")

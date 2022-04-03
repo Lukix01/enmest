@@ -109,7 +109,7 @@ function Game:update(dt)
         Alert:update(dt, Game.alert.text)
     end 
 
-    Timer:start(dt, { { timeLimit = 10, fn = Income}, { timeLimit = 15, fn = Bills }  })
+    Timer:start(dt, { { timeLimit = 10, fn = Income}, { timeLimit = 25, fn = Bills }  })
 end
 
 function Game:draw()
