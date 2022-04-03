@@ -1,5 +1,7 @@
 require("src/utils/timer")
 require("src/states/game/ui/box")
+require("src/states/game/ui/alert")
+require("src/modules/audio")
 
 Stats = {
     investments = {
@@ -14,6 +16,7 @@ Stats = {
 }
 
 Game = {
+    alert = false,
     nextInvestment = {
         name = "house",
         inv = 1,
@@ -41,6 +44,9 @@ function PayBills()
     end
 end
 
+function Work()
+    
+end
 
 Box = {
     width = 600,
@@ -51,31 +57,38 @@ Box = {
     buttons = {
         { text = "[1] Buy a new " .. Game.nextInvestment.name, hover = Game.nextInvestment.price .. "$", fn = buyNewInvestment, x = love.graphics.getWidth() / 2 - 600 / 2 },
         { text = "[2] Pay bills", hover = "bills", fn = PayBills, x = love.graphics.getWidth() / 2 - 600 / 2  + 600 / 3, down = false },
-        { text = "[3] Go to work", hover = "work", fn = Bills, x = love.graphics.getWidth() / 2 - 600 / 2  + 600 / 3 * 2, down = false }
+        { text = "[3] Go to work", hover = "work", fn = Work, x = love.graphics.getWidth() / 2 - 600 / 2  + 600 / 3 * 2, down = false }
     }
 }
 
 
 function Game:load()
     GameBox:load()
+    Alert:load()
 end
 
 function Income()
     Stats.money = Stats.money + Stats.income
 end
 
-function Bills()
-    if Stats.waitingBills == Stats.bills * 3 then
-        love.event.quit()
-    else
-        Stats.waitingBills = Stats.waitingBills + Stats.bills
-    end
-end
 
 function Game:update(dt)
-    Timer:start(dt, { { timeLimit = 10, fn = Income}, { timeLimit = 5, fn = Bills}  })
+    function Bills()
+        if Stats.waitingBills == Stats.bills * 3 then
+            love.event.quit()
+        else
+            Stats.waitingBills = Stats.waitingBills + Stats.bills
+            Audio:play("assets/sounds/alert.wav")
+            Game.alert = true
+        end
+    end
+    if Game.alert then
+        Alert:update(dt, Game.alert)
+    end 
+    Timer:start(dt, { { timeLimit = 10, fn = Income}, { timeLimit = 10, fn = Bills}  })
 end
 
 function Game:draw()
+    Alert:draw()
     GameBox:draw()
 end

@@ -12,7 +12,7 @@ end
 
 function GameBox:draw()
     love.graphics.printf(Stats.money .. "$", love.graphics.newFont(20), Box.x - 15, Box.y - 50, Box.width, "right")
-    love.graphics.setColor(0, 0, 0, 1)
+    love.graphics.setColor(0, 0, 0, 0.3)
     love.graphics.rectangle("fill", Box.x, Box.y, Box.width, Box.height)
     love.graphics.setColor(1, 1, 1, 1)
     love.graphics.printf("Your Investments", love.graphics.newFont(25), 0, 280, 1280, "center")
