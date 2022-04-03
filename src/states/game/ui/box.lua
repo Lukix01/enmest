@@ -18,7 +18,7 @@ function GameBox:draw()
     love.graphics.printf("Your Investments", love.graphics.newFont(25), 0, 280, 1280, "center")
     love.graphics.printf("Income: " .. Stats.income .. "$/day", love.graphics.newFont(18), 0, 320, 1280, "center")
     love.graphics.setColor(0.5, 0.5, 0.5, 1)
-    love.graphics.printf("Houses: " .. Stats.investments[1].amount .. " | " .. "Lcoins: " .. Stats.investments[2].name .. " | " .. "Hotels: " .. Stats.investments[3].name, love.graphics.newFont(18), 0, 350, 1280, "center")
+    love.graphics.printf("Houses: " .. Stats.investments[1].amount .. " | " .. "Lcoins: " .. Stats.investments[2].amount .. " | " .. "Hotels: " .. Stats.investments[3].amount, love.graphics.newFont(18), 0, 350, 1280, "center")
     love.graphics.setColor(1, 1, 1, 1)
     for i, button in ipairs(Box.buttons) do
         button.pressed = button.down
