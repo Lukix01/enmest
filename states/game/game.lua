@@ -32,6 +32,7 @@ function buyNewInvestment()
         Stats.money = Stats.money - Game.nextInvestment.price
         Stats.income = Stats.income + Stats.investments[Game.nextInvestment.inv].income 
         Stats.bills = Stats.bills + Game.nextInvestment.bills 
+        Audio:play("assets/sounds/success.wav")
         if Stats.investments[1].amount == 10 and Stats.investments[2].amount == 0 then
             Game.nextInvestment.name = "lcoin"
             Game.nextInvestment.inv = 2
