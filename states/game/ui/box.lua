@@ -27,8 +27,10 @@ function GameBox:draw()
         love.graphics.setColor(1, 1, 1, 1)                                                                          
         love.graphics.print(button.text, Button.font, button.x + Button.width / 2 - Button.font:getWidth(button.text) / 2, Button.y + Button.height / 2 - Button.font:getHeight() / 2)
         if Box.buttons[1].secondText then
-            local text = "Price: " .. Game.nextInvestment.price .. "$"
+            local text = "New " .. Game.nextInvestment.name ..": ".. Game.nextInvestment.price .. "$"
+            love.graphics.setColor(0.5, 0.5, 0.5, 1)
             love.graphics.print(text, love.graphics.newFont(13), Box.buttons[1].x + Button.width / 2 - Button.font:getWidth(text) / 2, Button.y + Button.height / 2 - Button.font:getHeight() / 2 + 45)
+            love.graphics.setColor(1, 1, 1, 1)
         end
     end
 end
