@@ -19,7 +19,6 @@ Stats = {
 
 Game = {
     alert = { state = false, text = nil },
-    workingCountdown = 0,
     working = false,
     nextInvestment = {
         name = "house",
@@ -61,7 +60,7 @@ function PayBills()
 end
 
 function Working()
-    if not Game.working and Game.workingCountdown == 0 then
+    if not Game.working and Work.countdown == 0 then
         Game.working = true
     else
         Game.working = false
@@ -94,20 +93,22 @@ end
 
 
 function Game:update(dt)
+    Work:update(dt)
     function Bills()
         if Stats.billsTime == 0 then
             love.event.quit()
         else
             Stats.waitingBills = Stats.waitingBills + Stats.bills
             Stats.billsTime = Stats.billsTime - 1
-            Audio:play("assets/sounds/alert.wav")
             Game.alert.state = true
+            Audio:play("assets/sounds/alert.wav")
             Game.alert.text = "New bills to pay ("  .. Stats.waitingBills .. "$) " .. "You have " .. Stats.billsTime ..  " weeks to do that, otherwise you lose the game."
         end
     end
     if Game.alert.state then
         Alert:update(dt, Game.alert.text)
     end 
+
     Timer:start(dt, { { timeLimit = 10, fn = Income}, { timeLimit = 15, fn = Bills }  })
 end
 

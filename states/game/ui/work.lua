@@ -1,7 +1,7 @@
 require("modules/key")
 require("states/game/ui/alert")
-require("utils/timer")
 
+require("modules/audio")
 
 Work = {}
 
@@ -11,15 +11,38 @@ function Work:load()
     Work.width = Box.width
     Work.height = 150
     Work.clicks = 0
+    Work.finished = false
+    Work.countdown = 0
 end
 
-function working()
+function Work:update(dt)
+    if Work.finished then
+        if Work.countdown == 20 then
+            Game.alert.state = true
+            Game.alert.text = "You can work again in one minute"
+        end
+        if Work.countdown >= 0 then
+            Work.countdown = Work.countdown - dt
+        else
+            Work.finished = false
+            Work.countdown = 0
+            Work.clicks = 0
+            Game.alert.state = true
+            Game.alert.text = "You can go back to work now"
+        end
+    end
+end
+
+function Click()
     if Game.working then
         if Work.clicks < 49 then
             Work.clicks = Work.clicks + 1
         else
             Game.working = false
-            Timer:start(dt, { { timeLimit = 10, fn = Income}, { timeLimit = 15, fn = Bills }  })
+            Work.countdown = 20
+            Work.finished = true
+            Stats.money = Stats.money + 1000
+            Audio:play("assets/sounds/alert.wav")
         end
     end
 end
@@ -33,5 +56,5 @@ function Work:draw()
     love.graphics.setColor(0.5, 0.5, 0.5, 1)
     love.graphics.printf(Work.clicks, love.graphics.newFont(15), Work.x, Work.y + 70, Work.width, "center")
     love.graphics.setColor(1, 1, 1, 1)
-    Key:down("w", working)
+    Key:down("w", Click)
 end

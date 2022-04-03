@@ -7,7 +7,7 @@ function Alert:load()
     Alert.text = nil
     Alert.width = 250
     Alert.height = 250
-    Alert.x = Box.x - Alert.width - 50
+    Alert.x = Box.x - Alert.width - 40
     Alert.y = love.graphics.getHeight() / 2 - 250 / 2
 end
 
