@@ -19,6 +19,14 @@ Stats = {
     income = 20
 }
 
+function test()
+    print("test")
+end
+
+function second()
+    print("second")
+end
+
 Box = {
     width = 600,
     height = 250,
@@ -26,9 +34,9 @@ Box = {
     y = love.graphics.getHeight() / 2 - 250 / 2,
     margin = 10,
     buttons = {
-        { text = "Buy a new " .. Game.nextInvestment.name, fn = nil, x = love.graphics.getWidth() / 2 - 600 / 2 },
-        { text = "Pay bills", fn = nil, x = love.graphics.getWidth() / 2 - 600 / 2  + 600 / 3 },
-        { text = "Go to work", fn = nil, x = love.graphics.getWidth() / 2 - 600 / 2  + 600 / 3 * 2 }
+        { text = "Buy a new " .. Game.nextInvestment.name, fn = test, x = love.graphics.getWidth() / 2 - 600 / 2, down = false, pressed = false },
+        { text = "Pay bills", fn = test, x = love.graphics.getWidth() / 2 - 600 / 2  + 600 / 3, down = false, pressed = false },
+        { text = "Go to work", fn = second, x = love.graphics.getWidth() / 2 - 600 / 2  + 600 / 3 * 2, down = false, pressed = false }
     }
 }
 
