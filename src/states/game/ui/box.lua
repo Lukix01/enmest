@@ -1,3 +1,5 @@
+require("src/modules/key")
+
 GameBox = {}
 Button = {}
 
@@ -14,10 +16,12 @@ function GameBox:draw()
     love.graphics.rectangle("fill", Box.x, Box.y, Box.width, Box.height)
     love.graphics.setColor(1, 1, 1, 1)
     love.graphics.printf("Your Investments", love.graphics.newFont(25), 0, 280, 1280, "center")
-    love.graphics.printf("Income: " .. Stats.income .. "$/day", love.graphics.newFont(18), 0, 320, 1280, "center")
+    love.graphics.printf("Income: " .. Stats.income .. "$/day" .. " | " .. "Bills: " .. Stats.bills .. "$/month", love.graphics.newFont(18), 0, 320, 1280, "center")
     love.graphics.setColor(0.5, 0.5, 0.5, 1)
     love.graphics.printf("Houses: " .. Stats.investments[1].amount .. " | " .. "Lcoins: " .. Stats.investments[2].amount .. " | " .. "Hotels: " .. Stats.investments[3].amount, love.graphics.newFont(18), 0, 350, 1280, "center")
+    
     for i, button in ipairs(Box.buttons) do
+        Key:down(tostring(i), button.fn)
         love.graphics.setColor(0.3, 0.5, 0.2, 1)
         love.graphics.rectangle("fill", button.x, Button.y, Button.width, Button.height)
         love.graphics.setColor(1, 1, 1, 1)                                                                          
