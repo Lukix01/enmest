@@ -1,7 +1,9 @@
 require("src/states/menu/menu")
 require("src/states/game/game")
 
-WindowManager = {}
+WindowManager = {
+    state = "menu"
+}
 
 function WindowManager:load()
     Menu:load()
@@ -14,10 +16,9 @@ function WindowManager:update(dt)
 end
 
 function WindowManager:draw()
-    self.state = "game"
-    if self.state == "menu" then
+    if WindowManager.state == "menu" then
         Menu:draw()
-    elseif self.state == "game" then
+    elseif WindowManager.state == "game" then
         Game:draw()
     end
 end

@@ -17,6 +17,6 @@ function Menu:draw()
     love.graphics.printf("Press space to start", love.graphics.newFont(25), 0, 350, 1280, "center")
     love.graphics.setColor(1, 1, 1, 1)
     if love.keyboard.isDown("space") then
-        WindowManager.state = WindowManager.state:gsub("menu", "game")
+        WindowManager.state = "game"
     end
 end
