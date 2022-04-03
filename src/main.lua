@@ -4,7 +4,7 @@ love.graphics.setDefaultFilter("nearest", "nearest")
 
 
 function love.load()
-    grid = love.graphics.newImage("assets/grid.png")
+    grid = love.graphics.newImage("assets/background.png")
     WindowManager:load()
 end
 
