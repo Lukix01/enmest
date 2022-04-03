@@ -4,10 +4,10 @@ Button = {}
 
 
 function GameBox:load()
-    Button.font = love.graphics.newFont(20)
+    Button.font = love.graphics.newFont(15)
     Button.width = Box.width / 3
-    Button.height = 70
-    Button.y = 395
+    Button.height = 50
+    Button.y = 400
 end
 
 function GameBox:draw()
@@ -34,7 +34,7 @@ function GameBox:draw()
         end
         love.graphics.rectangle("fill", button.x, Button.y, Button.width, Button.height)
         love.graphics.setColor(1, 1, 1, 1)                                                                          
-        love.graphics.print(button.text, Button.font, button.x + Button.width / 2 - Button.font:getWidth(button.text) / 2, Button.y + Button.font:getHeight())
+        love.graphics.print(button.text, Button.font, button.x + Button.width / 2 - Button.font:getWidth(button.text) / 2, Button.y + Button.height / 2 - Button.font:getHeight() / 2)
     end
 end
 
