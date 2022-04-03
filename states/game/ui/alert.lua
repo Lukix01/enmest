@@ -14,12 +14,12 @@ end
 function Alert:update(dt, text)
     Alert.text = text
     Alert.state = true
-    if Game.alert and Alert.timeLeft >= 0 then
+    if Game.alert.state and Alert.timeLeft >= 0 then
         Alert.timeLeft = Alert.timeLeft - dt
     else
         Alert.state = false
         Alert.timeLeft = 6
-        Game.alert = false
+        Game.alert.state = false
     end
 end
 

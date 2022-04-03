@@ -1,6 +1,7 @@
 require("utils/timer")
 require("states/game/ui/box")
 require("states/game/ui/alert")
+require("states/game/ui/work")
 require("modules/audio")
 
 Stats = {
@@ -17,7 +18,9 @@ Stats = {
 }
 
 Game = {
-    alert = false,
+    alert = { state = false, text = nil },
+    workingCountdown = 0,
+    working = false,
     nextInvestment = {
         name = "house",
         inv = 1,
@@ -57,8 +60,12 @@ function PayBills()
     end
 end
 
-function Work()
-    
+function Working()
+    if not Game.working and Game.workingCountdown == 0 then
+        Game.working = true
+    else
+        Game.working = false
+    end
 end
 
 Box = {
@@ -70,7 +77,7 @@ Box = {
     buttons = {
         { text = "[1] Buy a new investment", secondText = true, fn = buyNewInvestment, x = love.graphics.getWidth() / 2 - 650 / 2 },
         { text = "[2] Pay bills", secondText = true, fn = PayBills, x = love.graphics.getWidth() / 2 - 650 / 2  + 650 / 3, down = false },
-        { text = "[3] Go to work", fn = Work, x = love.graphics.getWidth() / 2 - 650 / 2  + 650 / 3 * 2, down = false }
+        { text = "[3] Go to work", fn = Working, x = love.graphics.getWidth() / 2 - 650 / 2  + 650 / 3 * 2, down = false }
     }
 }
 
@@ -78,6 +85,7 @@ Box = {
 function Game:load()
     GameBox:load()
     Alert:load()
+    Work:load()
 end
 
 function Income()
@@ -93,16 +101,20 @@ function Game:update(dt)
             Stats.waitingBills = Stats.waitingBills + Stats.bills
             Stats.billsTime = Stats.billsTime - 1
             Audio:play("assets/sounds/alert.wav")
-            Game.alert = true
+            Game.alert.state = true
+            Game.alert.text = "New bills to pay ("  .. Stats.waitingBills .. "$) " .. "You have " .. Stats.billsTime ..  " weeks to do that, otherwise you lose the game."
         end
     end
-    if Game.alert then
-        Alert:update(dt, "New bills to pay ("  .. Stats.waitingBills .. "$) " .. "You have " .. Stats.billsTime ..  " weeks to do that, otherwise you lose the game.")
+    if Game.alert.state then
+        Alert:update(dt, Game.alert.text)
     end 
-    Timer:start(dt, { { timeLimit = 10, fn = Income}, { timeLimit = 40, fn = Bills }  })
+    Timer:start(dt, { { timeLimit = 10, fn = Income}, { timeLimit = 15, fn = Bills }  })
 end
 
 function Game:draw()
     Alert:draw()
     GameBox:draw()
+    if Game.working then
+        Work:draw()
+    end
 end
