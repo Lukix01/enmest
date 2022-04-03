@@ -32,11 +32,16 @@ function buyNewInvestment()
         Stats.money = Stats.money - Game.nextInvestment.price
         Stats.income = Stats.income + Stats.investments[Game.nextInvestment.inv].income 
         Stats.bills = Stats.bills + Game.nextInvestment.bills 
-        if Stats.investments[1].amount == 4 then
+        if Stats.investments[1].amount == 10 and Stats.investments[2].amount == 0 then
             Game.nextInvestment.name = "lcoin"
             Game.nextInvestment.inv = 2
             Game.nextInvestment.price = 1000
             Game.nextInvestment.bills = 70
+        elseif Stats.investments[2].amount == 10 then
+            Game.nextInvestment.name = "hotel"
+            Game.nextInvestment.inv = 3
+            Game.nextInvestment.price = 5000
+            Game.nextInvestment.bills = 200
         end
     end
 end
@@ -60,8 +65,8 @@ Box = {
     y = love.graphics.getHeight() / 2 - 250 / 2,
     margin = 10,
     buttons = {
-        { text = "[1] Buy a new " .. Game.nextInvestment.name, secondText = "Price: " .. Game.nextInvestment.price .. "$", fn = buyNewInvestment, x = love.graphics.getWidth() / 2 - 600 / 2 },
-        { text = "[2] Pay bills", secondText = "Bills: " .. Stats.waitingBills .. "$", fn = PayBills, x = love.graphics.getWidth() / 2 - 600 / 2  + 600 / 3, down = false },
+        { text = "[1] Buy a new " .. Game.nextInvestment.name, secondText = true, fn = buyNewInvestment, x = love.graphics.getWidth() / 2 - 600 / 2 },
+        { text = "[2] Pay bills", secondText = true, fn = PayBills, x = love.graphics.getWidth() / 2 - 600 / 2  + 600 / 3, down = false },
         { text = "[3] Go to work", fn = Work, x = love.graphics.getWidth() / 2 - 600 / 2  + 600 / 3 * 2, down = false }
     }
 }
