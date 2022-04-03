@@ -1,7 +1,9 @@
 Key = {}
 
-function Key:down(key, fn)
-    if love.keyboard.isDown(key) then
-        fn()
-    end
+function Key:down(userKey, fn)
+    function love.keypressed(key)
+        if key == userKey then
+            fn()
+        end
+    end 
 end
