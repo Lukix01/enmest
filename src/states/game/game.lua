@@ -1,37 +1,26 @@
 require("src/utils/timer")
 require("src/states/game/ui/box")
 
+Stats = {
+    investments = {
+        {name = "houses", amount = 1},
+        {name = "lcoins", amount = 0},
+        {name = "hotels", amount = 0}
+    },
+    money = 100,
+    bills = 0,
+    income = 50
+}
+
 Game = {
     nextInvestment = {
         name = "house",
+        inv = Stats.investments[1].name,
         price = 50
     }
 }
 
-Stats = {
-    investments = {
-        houses = 1,
-        lcoins = 0,
-        hotels = 0
-    },
-    money = 100,
-    income = 50
-}
 
-function buyNewInvestment()
-    if Stats.money >= Game.nextInvestment.price then 
-        if Game.nextInvestment.name == "house" then
-            Stats.investments.houses = Stats.investments.houses + 1
-        elseif Game.nextInvestment.name == "lcoin" then
-            Stats.investments.lcoins = Stats.investments.lcoins + 1
-        elseif Game.nextInvestment.name == "hotel" then
-            Stats.investments.hotels = Stats.investments.hotels + 1
-        end
-        Stats.money = Stats.money - Game.nextInvestment.price
-    else 
-        print("not enough money")
-    end
-end
 
 Box = {
     width = 600,
@@ -40,15 +29,14 @@ Box = {
     y = love.graphics.getHeight() / 2 - 250 / 2,
     margin = 10,
     buttons = {
-        { text = "Buy a new " .. Game.nextInvestment.name, fn = buyNewInvestment, x = love.graphics.getWidth() / 2 - 600 / 2, down = false, pressed = false },
-        { text = "Pay bills", fn = nil, x = love.graphics.getWidth() / 2 - 600 / 2  + 600 / 3, down = false, pressed = false },
-        { text = "Go to work", fn = nil, x = love.graphics.getWidth() / 2 - 600 / 2  + 600 / 3 * 2, down = false, pressed = false }
+        { text = "Buy a new " .. Game.nextInvestment.name, fn = buyNewInvestment, x = love.graphics.getWidth() / 2 - 600 / 2 },
+        { text = "Pay bills", fn = nil, x = love.graphics.getWidth() / 2 - 600 / 2  + 600 / 3, down = false },
+        { text = "Go to work", fn = nil, x = love.graphics.getWidth() / 2 - 600 / 2  + 600 / 3 * 2, down = false }
     }
 }
 
 
 function Game:load()
-    Stats.income = 20
     GameBox:load()
 end
 
